@@ -19,4 +19,5 @@ COPY . .
 EXPOSE 8501
 
 # Use environment variable LANGCHAIN_API_KEY for API key in Render settings
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# Bind Streamlit to the port Render provides in $PORT (fallback to 8501 locally)
+CMD ["bash", "-lc", "streamlit run app.py --server.port=${PORT:-8501} --server.address=0.0.0.0"]
